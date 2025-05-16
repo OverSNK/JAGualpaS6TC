@@ -2,27 +2,61 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JAGualpaS6TC.Views.vCrud"
-             Title="vCrud">
+             Title="C">
     <VerticalStackLayout
         Spacing="20"
         Padding="20">
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="TAREA EN CLASE SEMANA 6"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Text="ID Venta" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+            <Label Grid.Row="0" Grid.Column="1" Text="ID Cliente" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+            <Label Grid.Row="0" Grid.Column="2" Text="ID Productp" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+            <Label Grid.Row="0" Grid.Column="3" Text="Fecha" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+            <Label Grid.Row="0" Grid.Column="4" Text="Descripción" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+            <Label Grid.Row="0" Grid.Column="5" Text="Cantidad" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black" HorizontalTextAlignment="Center"/>
+            <Label Grid.Row="0" Grid.Column="6" Text="Precio" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+        </Grid>
         <ListView x:Name="lvVentas">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="5">
-                            <Label Text="{Binding idVenta}" />
-                            <Label Text="{Binding idCliente}" />
-                            <Label Text="{Binding idProducto}" />
-                            <Label Text="{Binding fecha}" />
-                            <Label Text="{Binding descripcion}" />
-                            <Label Text="{Binding cantidad}" />
-                            <Label Text="{Binding precio}" />
-                        </StackLayout>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Idventa}" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Idcliente}" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding Idproducto}" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="3" Text="{Binding Fecha, StringFormat='{}{0:yyyy-MM-dd}'}" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="4" Text="{Binding Descripcion}" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="5" Text="{Binding Cantidad}" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="6" Text="{Binding Precio, StringFormat='{}{0:C}'}" FontAttributes="Bold" />
+
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

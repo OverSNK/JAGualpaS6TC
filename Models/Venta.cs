@@ -8,11 +8,11 @@ namespace JAGualpaS6TC.Models
 {
     public class Venta
     {
-        public int Id_venta { get; set; }
-        public int Id_cliente { get; set; }
-        public int Id_producto { get; set; }
+        public int Idventa { get; set; }
+        public int Idcliente { get; set; }
+        public int Idproducto { get; set; }
         public DateTime Fecha { get; set; }
-        public string Descripcion { get; set; }
+        public required string Descripcion { get; set; }
         public int Cantidad { get; set; }
         public int Precio { get; set; }
 
