@@ -1,6 +1,8 @@
+using Android.Opengl;
 using JAGualpaS6TC.Models;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Net;
 
 namespace JAGualpaS6TC.Views;
 
@@ -9,7 +11,7 @@ public partial class vCrud : ContentPage
 	private const string URL = "http://localhost:8080/api/ventas/ver";
 	private HttpClient cliente = new HttpClient();
 	private ObservableCollection<Venta> _ventaTem;
-    public DDvCrud()
+    public vCrud()
 	{
 		InitializeComponent();
 		mostrarVenta();
@@ -20,5 +22,11 @@ public partial class vCrud : ContentPage
 		List<Venta> lista = JsonConvert.DeserializeObject<List<Venta>>(content);
         _ventaTem = new ObservableCollection<Venta>(lista);
 		lvVentas.ItemsSource = _ventaTem;
+    }
+
+
+    private void btnAgregar_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new vAñadirEstudiante());
     }
 }

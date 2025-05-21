@@ -7,9 +7,13 @@
         Spacing="20"
         Padding="20">
         <Label 
-            Text="TAREA EN CLASE SEMANA 6"
+            Text="TAREA EN CLASE SEMANA rfgfg 6"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button x:Name="btnAgregar" Text="Añadir Estudiante" 
+                    Clicked="btnAgregar_Clicked"
+                    BackgroundColor="Green"
+                    TextColor="Black"/>
         <Grid Padding="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -47,7 +51,6 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
                             <Label Grid.Row="0" Grid.Column="0" Text="{Binding Idventa}" FontAttributes="Bold" />
                             <Label Grid.Row="0" Grid.Column="1" Text="{Binding Idcliente}" FontAttributes="Bold" />
                             <Label Grid.Row="0" Grid.Column="2" Text="{Binding Idproducto}" FontAttributes="Bold" />
@@ -55,11 +58,13 @@
                             <Label Grid.Row="0" Grid.Column="4" Text="{Binding Descripcion}" FontAttributes="Bold" />
                             <Label Grid.Row="0" Grid.Column="5" Text="{Binding Cantidad}" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
                             <Label Grid.Row="0" Grid.Column="6" Text="{Binding Precio, StringFormat='{}{0:C}'}" FontAttributes="Bold" />
-
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+
     </VerticalStackLayout>
+
 </ContentPage>
