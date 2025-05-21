@@ -61,5 +61,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button
+            x:Name="btnAgregar"
+            Text="Agregar Venta"
+            Clicked="btnAgregar_Clicked"
+            HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
