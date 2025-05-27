@@ -2,15 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JAGualpaS6TC.Views.vCrud"
-             Title="C">
+             Title="Lista de Ventas">
     <ScrollView>
         <VerticalStackLayout
             Spacing="20"
             Padding="20">
-            <Label 
-                Text="TAREA EN CLASE SEMANA 6"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+            <Label
+                Text="TAREA EN CLASE SEMANA 6 y 7(CRUD COMPLETO)"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                FontSize="20"
+                FontAttributes="Bold"/>
+
+            <ActivityIndicator x:Name="activityIndicator" IsRunning="False" Color="Blue" />
+
             <Grid Padding="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -20,24 +25,28 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Text="ID Venta" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
                 <Label Grid.Row="0" Grid.Column="1" Text="ID Cliente" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
-                <Label Grid.Row="0" Grid.Column="2" Text="ID Productp" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+                <Label Grid.Row="0" Grid.Column="2" Text="ID Producto" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
                 <Label Grid.Row="0" Grid.Column="3" Text="Fecha" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
                 <Label Grid.Row="0" Grid.Column="4" Text="Descripción" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
                 <Label Grid.Row="0" Grid.Column="5" Text="Cantidad" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black" HorizontalTextAlignment="Center"/>
                 <Label Grid.Row="0" Grid.Column="6" Text="Precio" FontAttributes="Bold" BackgroundColor="Yellow" TextColor="Black"/>
+                <Label Grid.Row="0" Grid.Column="7" Text="Editar" FontAttributes="Bold" BackgroundColor="LightBlue" TextColor="Black" HorizontalTextAlignment="Center"/>
+                <Label Grid.Row="0" Grid.Column="8" Text="Eliminar" FontAttributes="Bold" BackgroundColor="LightCoral" TextColor="Black" HorizontalTextAlignment="Center"/>
             </Grid>
-            <ListView x:Name="lvVentas">
+
+            <ListView x:Name="lvVentas" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid Padding="10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -47,16 +56,29 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Text="{Binding Idventa}" FontAttributes="Bold" />
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Idcliente}" FontAttributes="Bold" />
-                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding Idproducto}" FontAttributes="Bold" />
-                                <Label Grid.Row="0" Grid.Column="3" Text="{Binding Fecha, StringFormat='{}{0:yyyy-MM-dd}'}" FontAttributes="Bold" />
-                                <Label Grid.Row="0" Grid.Column="4" Text="{Binding Descripcion}" FontAttributes="Bold" />
-                                <Label Grid.Row="0" Grid.Column="5" Text="{Binding Cantidad}" FontAttributes="Bold"  HorizontalTextAlignment="Center"/>
-                                <Label Grid.Row="0" Grid.Column="6" Text="{Binding Precio, StringFormat='{}{0:C}'}" FontAttributes="Bold" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Idcliente}" />
+                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding Idproducto}" />
+                                <Label Grid.Row="0" Grid.Column="3" Text="{Binding Fecha, StringFormat='{}{0:yyyy-MM-dd}'}" />
+                                <Label Grid.Row="0" Grid.Column="4" Text="{Binding Descripcion}" />
+                                <Label Grid.Row="0" Grid.Column="5" Text="{Binding Cantidad}" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Row="0" Grid.Column="6" Text="{Binding Precio, StringFormat='{}{0:C}'}" />
 
+                                <Button Grid.Row="0" Grid.Column="7" Text="Editar"
+                                        BackgroundColor="Blue" TextColor="White"
+                                        Margin="5,0"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="btnEditar_Clicked" />
+
+                                <Button Grid.Row="0" Grid.Column="8" Text="Eliminar"
+                                        BackgroundColor="Red" TextColor="White"
+                                        Margin="5,0"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="btnEliminar_Clicked" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

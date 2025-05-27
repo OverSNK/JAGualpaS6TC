@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JAGualpaS6TC.Views.vEditarVenta"
+             Title="Editar Venta">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="ID Venta (No editable)" />
+            <Entry x:Name="txtIdventa" IsReadOnly="True" BackgroundColor="#E0E0E0" TextColor="Gray"/>
+
+            <Label Text="ID Cliente" />
+            <Entry x:Name="txtIdcliente" Keyboard="Numeric" Placeholder="Ingrese el ID del cliente" />
+
+            <Label Text="ID Producto" />
+            <Entry x:Name="txtIdproducto" Keyboard="Numeric" Placeholder="Ingrese el ID del producto" />
+
+            <Label Text="Fecha de la venta" />
+            <DatePicker x:Name="dpFecha" />
+
+            <Label Text="Descripción" />
+            <Entry x:Name="txtDescripcion" Placeholder="Ingrese una descripción" />
+
+            <Label Text="Cantidad" />
+            <Entry x:Name="txtCantidad" Keyboard="Numeric" Placeholder="Ingrese la cantidad" />
+
+            <Label Text="Precio" />
+            <Entry x:Name="txtPrecio" Keyboard="Numeric" Placeholder="Ingrese el precio" />
+
+            <Button x:Name="btnActualizarVenta"
+                    Text="Actualizar Venta"
+                    Clicked="btnActualizarVenta_Clicked"
+                    BackgroundColor="Orange"
+                    TextColor="White"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

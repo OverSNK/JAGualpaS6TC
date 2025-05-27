@@ -15,28 +15,16 @@ public partial class vAgregarVenta : ContentPage
     {
         try
         {
-            // NOTA IMPORTANTE:
-            // 1. NO ENVIAR idVenta si el backend lo genera automáticamente.
-            // 2. Convertir idCliente e idProducto a int si la entidad Java los espera como int.
-            // 3. Convertir precio a int si la entidad Java lo espera como int.
-            // 4. El formato de fecha debe ser el que tu backend (java.util.Date) espera.
-
             var ventaData = new
             {
-                // idVenta: ELIMINADO - NO SE DEBE ENVIAR SI ES GENERADO AUTOMÁTICAMENTE POR LA BD
 
-                // Asegúrate de que los campos no estén vacíos antes de convertir a int
                 idCliente = string.IsNullOrEmpty(txtIdcliente.Text) ? 0 : int.Parse(txtIdcliente.Text),
                 idProducto = string.IsNullOrEmpty(txtIdproducto.Text) ? 0 : int.Parse(txtIdproducto.Text),
-
-                // Formato de fecha: Por ahora, mantén yyyy-MM-dd. Si sigue fallando por la fecha, investiga más.
-                fecha = dpFecha.Date.ToString("yyyy-MM-dd"), // Este formato es comúnmente aceptado.
-                                                             // Si tu backend requiere un formato más completo (con hora),
-                                                             // prueba "yyyy-MM-ddTHH:mm:ss.fffZ" o similar.
+                fecha = dpFecha.Date.ToString("yyyy-MM-dd"), 
 
                 descripcion = txtDescripcion.Text,
                 cantidad = string.IsNullOrEmpty(txtCantidad.Text) ? 0 : int.Parse(txtCantidad.Text),
-                precio = string.IsNullOrEmpty(txtPrecio.Text) ? 0 : int.Parse(txtPrecio.Text) // Cambiado a int.Parse
+                precio = string.IsNullOrEmpty(txtPrecio.Text) ? 0 : int.Parse(txtPrecio.Text) 
             };
 
             string jsonContent = JsonSerializer.Serialize(ventaData);
