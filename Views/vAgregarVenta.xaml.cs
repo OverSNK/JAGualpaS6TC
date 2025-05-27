@@ -1,33 +1,72 @@
-using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace JAGualpaS6TC.Views;
 
 public partial class vAgregarVenta : ContentPage
 {
-	public vAgregarVenta()
-	{
-		InitializeComponent();
-	}
+    public vAgregarVenta()
+    {
+        InitializeComponent();
+    }
 
-    private void btnAddVenta_Clicked(object sender, EventArgs e)
+    private async void btnAddVenta_Clicked(object sender, EventArgs e)
     {
         try
         {
-            WebClient cliente = new WebClient();
-            var parametros = new System.Collections.Specialized.NameValueCollection();
-            parametros.Add("idVenta", txtIdventa.Text);
-            parametros.Add("idCliente", txtIdcliente.Text);
-            parametros.Add("idProducto", txtIdproducto.Text);
-            parametros.Add("fecha", txtFecha.Text); // Asegúrate de que sea en formato válido: "yyyy-MM-dd"
-            parametros.Add("descripcion", txtDescripcion.Text);
-            parametros.Add("cantidad", txtCantidad.Text);
-            parametros.Add("precio", txtPrecio.Text);
-            cliente.UploadValues("http://localhost:8080/api/ventas/guardar", "POST", parametros);
-            Navigation.PushAsync(new vCrud());
+            // NOTA IMPORTANTE:
+            // 1. NO ENVIAR idVenta si el backend lo genera automáticamente.
+            // 2. Convertir idCliente e idProducto a int si la entidad Java los espera como int.
+            // 3. Convertir precio a int si la entidad Java lo espera como int.
+            // 4. El formato de fecha debe ser el que tu backend (java.util.Date) espera.
+
+            var ventaData = new
+            {
+                // idVenta: ELIMINADO - NO SE DEBE ENVIAR SI ES GENERADO AUTOMÁTICAMENTE POR LA BD
+
+                // Asegúrate de que los campos no estén vacíos antes de convertir a int
+                idCliente = string.IsNullOrEmpty(txtIdcliente.Text) ? 0 : int.Parse(txtIdcliente.Text),
+                idProducto = string.IsNullOrEmpty(txtIdproducto.Text) ? 0 : int.Parse(txtIdproducto.Text),
+
+                // Formato de fecha: Por ahora, mantén yyyy-MM-dd. Si sigue fallando por la fecha, investiga más.
+                fecha = dpFecha.Date.ToString("yyyy-MM-dd"), // Este formato es comúnmente aceptado.
+                                                             // Si tu backend requiere un formato más completo (con hora),
+                                                             // prueba "yyyy-MM-ddTHH:mm:ss.fffZ" o similar.
+
+                descripcion = txtDescripcion.Text,
+                cantidad = string.IsNullOrEmpty(txtCantidad.Text) ? 0 : int.Parse(txtCantidad.Text),
+                precio = string.IsNullOrEmpty(txtPrecio.Text) ? 0 : int.Parse(txtPrecio.Text) // Cambiado a int.Parse
+            };
+
+            string jsonContent = JsonSerializer.Serialize(ventaData);
+
+            Console.WriteLine($"JSON enviado desde MAUI: {jsonContent}");
+
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("http://localhost:8080/api/ventas/guardar", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await DisplayAlert("Éxito", "Venta añadida correctamente", "OK");
+                    await Navigation.PushAsync(new vCrud());
+                }
+                else
+                {
+                    string errorResponse = await response.Content.ReadAsStringAsync();
+                    await DisplayAlert("Error del servidor", $"El servidor devolvió un error: {response.StatusCode} - {errorResponse}", "OK");
+                }
+            }
+        }
+        catch (FormatException fex)
+        {
+            await DisplayAlert("Error de formato", "Por favor, asegúrese de que ID Cliente, ID Producto, Cantidad y Precio sean números válidos.", "OK");
         }
         catch (Exception ex)
         {
-            DisplayAlert("Error", ex.Message, "OK");
+            await DisplayAlert("Error inesperado", ex.Message, "OK");
         }
     }
 }

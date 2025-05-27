@@ -2,21 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JAGualpaS6TC.Views.vAgregarVenta"
-             Title="vAgregarVenta">
-    <VerticalStackLayout>
-        <Label Text="AÑADIR VENTA"
-            VerticalOptions="Center"
-            HorizontalOptions="Center" />
-            <Entry x:Name="txtIdventa" Placeholder="ID Venta" />
-            <Entry x:Name="txtIdcliente" Placeholder="ID Cliente" />
-            <Entry x:Name="txtIdproducto" Placeholder="ID Producto" />
-            <Entry x:Name="txtFecha" Placeholder="Fecha" />
-            <Entry x:Name="txtDescripcion" Placeholder="Descripción" />
-            <Entry x:Name="txtCantidad" Placeholder="Cantidad" />
-            <Entry x:Name="txtPrecio" Placeholder="Precio" />
-            <Button x:Name ="btnAddVenta"  Text="Añadir Estudiante" 
-        Clicked="btnAddVenta_Clicked"
-        BackgroundColor="Green"
-        TextColor="White"/>
-    </VerticalStackLayout>
+             Title="Agregar Venta">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="ID Cliente" />
+            <Entry x:Name="txtIdcliente" Keyboard="Numeric" Placeholder="Ingrese el ID del cliente" />
+
+            <Label Text="ID Producto" />
+            <Entry x:Name="txtIdproducto" Keyboard="Numeric" Placeholder="Ingrese el ID del producto" />
+
+            <Label Text="Fecha de la venta" />
+            <DatePicker x:Name="dpFecha" />
+
+            <Label Text="Descripción" />
+            <Entry x:Name="txtDescripcion" Placeholder="Ingrese una descripción" />
+
+            <Label Text="Cantidad" />
+            <Entry x:Name="txtCantidad" Keyboard="Numeric" Placeholder="Ingrese la cantidad" />
+
+            <Label Text="Precio" />
+            <Entry x:Name="txtPrecio" Keyboard="Numeric" Placeholder="Ingrese el precio" />
+
+            <Button x:Name="btnAddVenta" 
+                    Text="Agregar Venta" 
+                    Clicked="btnAddVenta_Clicked"
+                    BackgroundColor="Green"
+                    TextColor="White"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
